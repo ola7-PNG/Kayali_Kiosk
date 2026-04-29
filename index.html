@@ -6,7 +6,7 @@
 <title>KAYALI — Discover Your Scent</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23371506'/%3E%3Ctext x='50' y='72' font-family='Inter,sans-serif' font-size='66' font-weight='700' fill='%23f7f3ec' text-anchor='middle'%3Ek%3C/text%3E%3C/svg%3E">
 <script type="importmap">
 {
@@ -2070,6 +2070,9 @@
   .color-swatch.black {
     background: radial-gradient(circle at 35% 30%, #2a1810 0%, #050200 70%);
   }
+  .color-swatch.gold {
+    background: radial-gradient(circle at 35% 30%, #f5dab1 0%, #c69653 50%, #8a5a2b 100%);
+  }
   .color-swatch.active {
     border-color: var(--maroon-deep);
     transform: scale(1.08);
@@ -2118,7 +2121,132 @@
   }
   .form-note svg { width: 12px; height: 12px; margin-top: 2px; flex-shrink: 0; }
 
-  /* Configuration summary chip in CTA */
+  /* === Pairing recommendations card === */
+  .pairing-section {
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border-soft);
+  }
+  .pairing-header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .pairing-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--maroon-deep);
+    margin-bottom: 12px;
+    padding: 6px 14px;
+    background: var(--maroon-soft);
+    border-radius: 999px;
+  }
+  .pairing-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: clamp(24px, 2.6vw, 32px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+  .pairing-title .accent-text {
+    background: linear-gradient(120deg, var(--maroon-deep), var(--rose-warm) 50%, var(--gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: italic;
+  }
+  .pairing-sub {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .pairing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .pairing-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 20px 18px;
+    text-align: center;
+    transition: all 0.4s var(--ease);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+  }
+  .pairing-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold);
+    box-shadow: var(--shadow-md);
+  }
+  .pairing-image {
+    width: 96px;
+    height: 130px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+      radial-gradient(ellipse at 50% 35%, rgba(255, 255, 255, 0.7), transparent 60%),
+      linear-gradient(180deg, #faf6ee 0%, #ede2cc 100%);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.4s var(--ease);
+  }
+  .pairing-card:hover .pairing-image { transform: scale(1.04); }
+  .pairing-image img {
+    width: 64px;
+    height: auto;
+    filter: drop-shadow(0 12px 14px rgba(55, 21, 6, 0.18));
+  }
+  .pairing-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  .pairing-code {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .pairing-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--maroon-soft);
+    color: var(--maroon-deep);
+    margin-bottom: 8px;
+  }
+  .pairing-desc {
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--text-secondary);
+  }
   .engraving-summary {
     display: none;
     margin-top: 12px;
@@ -2913,6 +3041,10 @@
     .personalize-grid { grid-template-columns: 1fr; gap: 24px; }
     .bottle-stage-3d { aspect-ratio: 1 / 1.05; max-width: 420px; margin: 0 auto; width: 100%; }
     .result-personalize { padding: 32px 24px; }
+    .pairing-grid { grid-template-columns: 1fr; gap: 12px; }
+    .pairing-card { flex-direction: row; align-items: center; text-align: left; gap: 16px; padding: 16px 18px; }
+    .pairing-image { width: 70px; height: 92px; margin-bottom: 0; flex-shrink: 0; }
+    .pairing-image img { width: 46px; }
     .coll-grid { grid-template-columns: 1fr; }
     .coll-stats { grid-template-columns: 1fr; gap: 16px; }
     .stat-card { padding: 24px 22px; }
@@ -3296,11 +3428,23 @@
 
         <div class="form-group">
           <div class="form-label">
+            <span>Engraving Style</span>
+            <span class="label-value" id="fontStyleLabel">Sans Serif</span>
+          </div>
+          <div class="finish-pills">
+            <button class="finish-pill active" data-font="sans" onclick="setFontStyle('sans')">Sans Serif</button>
+            <button class="finish-pill" data-font="serif" onclick="setFontStyle('serif')">Serif</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-label">
             <span>Bottle Color</span>
-            <span class="label-value">Black</span>
+            <span class="label-value" id="bottleColorLabel">Onyx Black</span>
           </div>
           <div class="color-swatches">
-            <button class="color-swatch black active" aria-label="Black" title="Onyx Black"></button>
+            <button class="color-swatch black active" data-color="black" aria-label="Onyx Black" title="Onyx Black" onclick="setBottleColor('black')"></button>
+            <button class="color-swatch gold" data-color="gold" aria-label="Champagne Gold" title="Champagne Gold" onclick="setBottleColor('gold')"></button>
           </div>
         </div>
 
@@ -3332,6 +3476,23 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
           <span>Customized bottles are non-refundable and ship in 5–7 business days. Free customization with every purchase.</span>
         </div>
+      </div>
+    </div>
+
+    <!-- Kayali pairings — curated companion fragrances -->
+    <div class="pairing-section">
+      <div class="pairing-header">
+        <div class="pairing-eyebrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          The Perfect Pairing
+        </div>
+        <h3 class="pairing-title">These Kayali scents <span class="accent-text">love yours</span>.</h3>
+        <p class="pairing-sub">
+          Layer with one of these curated companions to create your own signature accord — chosen by Kayali's perfumers.
+        </p>
+      </div>
+      <div class="pairing-grid" id="pairingGrid">
+        <!-- pairing cards rendered by JS based on currentWinner -->
       </div>
     </div>
   </section>
@@ -3600,6 +3761,53 @@
       ]
     }
   };
+
+  // ============================================
+  // PAIRINGS — companion fragrances from the wider Kayali catalog
+  // ============================================
+  const pairings = {
+    vanilla: [
+      { name: "Vanilla 28", code: "No. 28", tag: "Same Family", image: "pair-vanilla28.webp", desc: "The original vanilla — deeper, richer, wood-warmed." },
+      { name: "Vanilla Candy Rock Sugar", code: "No. 42", tag: "Sweetens It", image: "pair-rocksugar.webp", desc: "Sugar-spun playfulness over your warm oud base." },
+      { name: "Musk Santal Freedom", code: "No. 34", tag: "Soft Layer", image: "pair-musksantal.webp", desc: "Skin-warmed sandalwood that lifts the vanilla." }
+    ],
+    cafe: [
+      { name: "Vanilla 28", code: "No. 28", tag: "Sweetens It", image: "pair-vanilla28.webp", desc: "Vanilla cream softens the espresso edge beautifully." },
+      { name: "Musk Santal Freedom", code: "No. 34", tag: "Grounds It", image: "pair-musksantal.webp", desc: "Sandalwood adds quiet depth beneath the coffee." },
+      { name: "Vanilla Candy Rock Sugar", code: "No. 42", tag: "Lifts It", image: "pair-rocksugar.webp", desc: "Sugared playfulness atop the smoky soul." }
+    ],
+    chocolate: [
+      { name: "Vanilla 28", code: "No. 28", tag: "Same Family", image: "pair-vanilla28.webp", desc: "Cream and cocoa — the timeless dessert pairing." },
+      { name: "Musk Santal Freedom", code: "No. 34", tag: "Grounds It", image: "pair-musksantal.webp", desc: "Soft sandalwood balances the gourmand depth." },
+      { name: "Vanilla Candy Rock Sugar", code: "No. 42", tag: "Sweetens It", image: "pair-rocksugar.webp", desc: "Sugar-bright lift on top of the chocolate richness." }
+    ],
+    musk: [
+      { name: "Musk Santal Freedom", code: "No. 34", tag: "Same Family", image: "pair-musksantal.webp", desc: "Sandalwood-musk — your same hush, with more wood." },
+      { name: "Vanilla 28", code: "No. 28", tag: "Warms It", image: "pair-vanilla28.webp", desc: "Creamy vanilla pulls warmth into the milky musk." },
+      { name: "Vanilla Candy Rock Sugar", code: "No. 42", tag: "Sweetens It", image: "pair-rocksugar.webp", desc: "A sugared sparkle to brighten the soft base." }
+    ]
+  };
+
+  function renderPairings(key) {
+    const grid = document.getElementById('pairingGrid');
+    if (!grid) return;
+    const list = pairings[key] || pairings.vanilla;
+    grid.innerHTML = '';
+    list.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'pairing-card';
+      card.innerHTML = `
+        <div class="pairing-image"><img src="${p.image}" alt="${p.name}" /></div>
+        <div>
+          <div class="pairing-tag">${p.tag}</div>
+          <div class="pairing-name">${p.name}</div>
+          <div class="pairing-code">${p.code}</div>
+          <div class="pairing-desc">${p.desc}</div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
 
   // ============================================
   // QUIZ DATA
@@ -4088,6 +4296,9 @@
 
     document.getElementById('expMatchName').textContent = f.name;
     document.getElementById('modalTitle').textContent = f.name + " Added";
+
+    // Refresh pairing recommendations for this fragrance
+    try { renderPairings(key); } catch (e) { console.warn('[Kayali] renderPairings failed:', e); }
   }
 
   // Called when a collection card is clicked — selects that fragrance and routes
@@ -4209,7 +4420,8 @@
     engraving: '',
     capFinish: 'gloss',
     glassFinish: 'clear',
-    bottleColor: 'black'
+    bottleColor: 'black',
+    fontStyle: 'sans'
   };
 
   function initEngraving() {
@@ -4251,13 +4463,39 @@
     updateConfigSummary();
   };
 
+  // Bottle color: black or gold (full bottle base color including label tone)
+  window.setBottleColor = function(color) {
+    configState.bottleColor = color;
+    document.querySelectorAll('[data-color]').forEach(b => b.classList.toggle('active', b.dataset.color === color));
+    const labelEl = document.getElementById('bottleColorLabel');
+    if (labelEl) labelEl.textContent = color === 'gold' ? 'Champagne Gold' : 'Onyx Black';
+    if (window.__bottle3d && window.__bottle3d.setBottleColor) {
+      window.__bottle3d.setBottleColor(color);
+    }
+    updateConfigSummary();
+  };
+
+  // Engraving font style: sans serif vs serif
+  window.setFontStyle = function(style) {
+    configState.fontStyle = style;
+    document.querySelectorAll('[data-font]').forEach(b => b.classList.toggle('active', b.dataset.font === style));
+    const labelEl = document.getElementById('fontStyleLabel');
+    if (labelEl) labelEl.textContent = style === 'serif' ? 'Serif' : 'Sans Serif';
+    if (window.__bottle3d && window.__bottle3d.setFontStyle) {
+      window.__bottle3d.setFontStyle(style);
+    }
+    updateConfigSummary();
+  };
+
   function updateConfigSummary() {
     const summary = document.getElementById('engravingSummary');
     const summaryText = document.getElementById('engravingSummaryText');
     const parts = [];
     if (configState.engraving) {
-      parts.push('<strong>"' + configState.engraving + '"</strong>');
+      const fontTag = configState.fontStyle === 'serif' ? '' : '';
+      parts.push('<strong>"' + configState.engraving + '"</strong>' + (configState.fontStyle === 'serif' ? ' <em>(serif)</em>' : ''));
     }
+    parts.push((configState.bottleColor === 'gold' ? 'Gold' : 'Black') + ' bottle');
     parts.push(configState.glassFinish.charAt(0).toUpperCase() + configState.glassFinish.slice(1) + ' glass');
     parts.push(configState.capFinish.charAt(0).toUpperCase() + configState.capFinish.slice(1) + ' cap');
 
@@ -4269,6 +4507,8 @@
     configState.engraving = '';
     configState.capFinish = 'gloss';
     configState.glassFinish = 'clear';
+    configState.bottleColor = 'black';
+    configState.fontStyle = 'sans';
 
     const input = document.getElementById('engravingInput');
     if (input) input.value = '';
@@ -4277,15 +4517,24 @@
 
     document.querySelectorAll('[data-cap]').forEach(b => b.classList.toggle('active', b.dataset.cap === 'gloss'));
     document.querySelectorAll('[data-glass]').forEach(b => b.classList.toggle('active', b.dataset.glass === 'clear'));
+    document.querySelectorAll('[data-color]').forEach(b => b.classList.toggle('active', b.dataset.color === 'black'));
+    document.querySelectorAll('[data-font]').forEach(b => b.classList.toggle('active', b.dataset.font === 'sans'));
+
     const capLabel = document.getElementById('capLabel');
     const glassLabel = document.getElementById('glassLabel');
+    const colorLabel = document.getElementById('bottleColorLabel');
+    const fontLabel = document.getElementById('fontStyleLabel');
     if (capLabel) capLabel.textContent = 'Gloss';
     if (glassLabel) glassLabel.textContent = 'Clear';
+    if (colorLabel) colorLabel.textContent = 'Onyx Black';
+    if (fontLabel) fontLabel.textContent = 'Sans Serif';
 
     if (window.__bottle3d) {
       window.__bottle3d.setLabelText('');
       window.__bottle3d.setCapFinish('gloss');
       window.__bottle3d.setGlassFinish('clear');
+      if (window.__bottle3d.setBottleColor) window.__bottle3d.setBottleColor('black');
+      if (window.__bottle3d.setFontStyle) window.__bottle3d.setFontStyle('sans');
     }
 
     const summary = document.getElementById('engravingSummary');
@@ -4654,13 +4903,34 @@
   const userState = {
     engraving: '',
     capFinish: 'gloss',
-    glassFinish: 'clear'
+    glassFinish: 'clear',
+    bottleColor: 'black',
+    fontStyle: 'sans'
   };
 
-  // Glass finish presets — polished black with subtle depth (matches reference)
+  // Bottle color base palettes — affect glass body color, cap color, and label tone
+  const bottleColors = {
+    black: {
+      glassColor: 0x080403,        // deep onyx
+      glassColorTinted: 0x040201,
+      capColor: 0x0a0503,
+      capColorMetal: 0x222222,
+      capColorGloss: 0x080403,
+      labelTone: 'gold'             // gold or rose label depending on variant
+    },
+    gold: {
+      glassColor: 0xb38640,        // warm champagne gold body
+      glassColorTinted: 0x8a5a2b,
+      capColor: 0xb38640,           // gold cap to match
+      capColorMetal: 0xd4a373,      // brighter metallic gold
+      capColorGloss: 0xb38640,
+      labelTone: 'cream'            // cream-on-gold for legibility
+    }
+  };
+
+  // Glass finish presets — surface treatment (transmission/roughness), independent of color
   const glassFinishes = {
     clear: {
-      color: 0x080403,
       transmission: 0.08,
       roughness: 0.04,
       metalness: 0.08,
@@ -4671,7 +4941,6 @@
       envMapIntensity: 2.2
     },
     frosted: {
-      color: 0x080403,
       transmission: 0.05,
       roughness: 0.55,
       metalness: 0.05,
@@ -4682,7 +4951,6 @@
       envMapIntensity: 1.0
     },
     tinted: {
-      color: 0x040201,
       transmission: 0.18,
       roughness: 0.05,
       metalness: 0.05,
@@ -4694,28 +4962,28 @@
     }
   };
 
-  // Cap finish presets
+  // Cap finish presets — surface only (metalness/roughness), color comes from bottleColor
   const capFinishes = {
     matte: {
-      color: 0x0a0503,
       metalness: 0.15,
       roughness: 0.85,
       clearcoat: 0.1,
-      clearcoatRoughness: 0.5
+      clearcoatRoughness: 0.5,
+      colorKey: 'capColor'
     },
     gloss: {
-      color: 0x080403,
       metalness: 0.15,
       roughness: 0.05,
       clearcoat: 1.0,
-      clearcoatRoughness: 0.03
+      clearcoatRoughness: 0.03,
+      colorKey: 'capColorGloss'
     },
     metallic: {
-      color: 0x222222,
       metalness: 0.95,
       roughness: 0.18,
       clearcoat: 0.4,
-      clearcoatRoughness: 0.1
+      clearcoatRoughness: 0.1,
+      colorKey: 'capColorMetal'
     }
   };
 
@@ -4807,6 +5075,8 @@
       setLabelText,
       setCapFinish: changeCapFinish,
       setGlassFinish: changeGlassFinish,
+      setBottleColor: changeBottleColor,
+      setFontStyle: changeFontStyle,
       setVariant
     };
 
@@ -5000,8 +5270,11 @@
 
   function makeGlassMaterial(finish) {
     const cfg = glassFinishes[finish];
+    const palette = bottleColors[userState.bottleColor] || bottleColors.black;
+    // Tinted finish uses a slightly deeper color from the palette
+    const color = finish === 'tinted' ? palette.glassColorTinted : palette.glassColor;
     return new THREE.MeshPhysicalMaterial({
-      color: cfg.color,
+      color: color,
       transmission: cfg.transmission,
       roughness: cfg.roughness,
       metalness: cfg.metalness,
@@ -5017,8 +5290,9 @@
 
   function makeCapMaterial(finish) {
     const cfg = capFinishes[finish];
+    const palette = bottleColors[userState.bottleColor] || bottleColors.black;
     return new THREE.MeshPhysicalMaterial({
-      color: cfg.color,
+      color: palette[cfg.colorKey] || palette.capColor,
       metalness: cfg.metalness,
       roughness: cfg.roughness,
       clearcoat: cfg.clearcoat,
@@ -5065,15 +5339,25 @@
 
     ctx.clearRect(0, 0, w, h);
 
-    const tone = variant.labelTone === 'rose' ? '#d6a594' : '#e6b988';
+    // Tone adapts to bottle color: gold bottle uses cream label, black uses gold/rose
+    let tone;
+    if (userState.bottleColor === 'gold') {
+      tone = '#fff8e7'; // cream-on-gold for legibility
+    } else {
+      tone = variant.labelTone === 'rose' ? '#d6a594' : '#e6b988';
+    }
     const cx = w / 2;
+
+    // Engraving font family — sans serif (Inter) by default, serif (Playfair-style) when toggled
+    const isSerif = userState.fontStyle === 'serif';
+    const engravingFamily = isSerif ? "'Cormorant Garamond', Georgia, 'Times New Roman', serif" : "Inter, system-ui, sans-serif";
 
     // Thin outer rectangular frame around the KAYALI mark
     ctx.strokeStyle = tone;
     ctx.lineWidth = 3;
     ctx.strokeRect(95, 130, w - 190, 320);
 
-    // KAY / ALI — large stacked
+    // KAY / ALI — large stacked (always Inter for brand consistency)
     ctx.fillStyle = tone;
     ctx.font = '700 145px Inter, system-ui, sans-serif';
     ctx.textAlign = 'center';
@@ -5081,7 +5365,7 @@
     ctx.fillText('KAY', cx, 230);
     ctx.fillText('ALI', cx, 365);
 
-    // OUDGASM (subtitle)
+    // OUDGASM (subtitle, always Inter)
     ctx.font = '500 32px Inter, system-ui, sans-serif';
     drawSpacedText(ctx, 'OUDGASM', cx, 530, 5);
 
@@ -5096,7 +5380,7 @@
     ctx.font = '500 26px Inter, system-ui, sans-serif';
     drawSpacedText(ctx, variant.name + ' | ' + variant.code, cx, 595, 4);
 
-    // ===== ENGRAVING — appears prominently below variant =====
+    // ===== ENGRAVING — uses chosen font style =====
     if (userState.engraving) {
       // Decorative divider above engraving
       ctx.lineWidth = 1;
@@ -5105,9 +5389,14 @@
       ctx.lineTo(cx + 80, 670);
       ctx.stroke();
 
-      // Engraved text — bold and well-spaced for readability
-      ctx.font = '600 36px Inter, system-ui, sans-serif';
-      drawSpacedText(ctx, userState.engraving.toUpperCase(), cx, 720, 7);
+      // Serif gets a slightly larger, more elegant treatment; sans is bolder
+      if (isSerif) {
+        ctx.font = '500 42px ' + engravingFamily;
+        drawSpacedText(ctx, userState.engraving, cx, 722, 4);
+      } else {
+        ctx.font = '600 36px ' + engravingFamily;
+        drawSpacedText(ctx, userState.engraving.toUpperCase(), cx, 720, 7);
+      }
     }
 
     if (labelTexture) labelTexture.needsUpdate = true;
@@ -5171,6 +5460,31 @@
       if (m.material && m.material.dispose) m.material.dispose();
       m.material = newMat;
     });
+  }
+
+  // Switch base bottle color (black/gold) — re-applies all glass and cap materials
+  // and re-draws the label so its tone matches the new bottle color.
+  function changeBottleColor(color) {
+    if (!bottleColors[color]) return;
+    userState.bottleColor = color;
+    // Re-apply glass and cap with current finishes (they pull color from userState)
+    const newGlass = makeGlassMaterial(userState.glassFinish);
+    glassMeshes.forEach(m => {
+      if (m.material && m.material.dispose) m.material.dispose();
+      m.material = newGlass;
+    });
+    const newCap = makeCapMaterial(userState.capFinish);
+    capMeshes.forEach(m => {
+      if (m.material && m.material.dispose) m.material.dispose();
+      m.material = newCap;
+    });
+    drawLabel();
+  }
+
+  function changeFontStyle(style) {
+    if (style !== 'sans' && style !== 'serif') return;
+    userState.fontStyle = style;
+    drawLabel();
   }
 
   function setLabelText(text) {
