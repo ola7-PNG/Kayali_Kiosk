@@ -2247,6 +2247,268 @@
     line-height: 1.45;
     color: var(--text-secondary);
   }
+
+  /* "View details →" call-to-action that appears on hover */
+  .pairing-view-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--maroon-deep);
+    opacity: 0.7;
+    transition: opacity 0.3s var(--ease), gap 0.3s var(--ease);
+  }
+  .pairing-view-link svg {
+    width: 11px;
+    height: 11px;
+    transition: transform 0.3s var(--ease);
+  }
+  .pairing-card:hover .pairing-view-link {
+    opacity: 1;
+    gap: 8px;
+  }
+  .pairing-card:hover .pairing-view-link svg {
+    transform: translateX(2px);
+  }
+
+  /* Reset button styling on pairing-card so it inherits proper layout */
+  button.pairing-card {
+    font-family: inherit;
+    text-align: inherit;
+  }
+
+  /* === Pairing detail modal === */
+  .pairing-detail-backdrop {
+    align-items: flex-start;
+    padding: 60px 24px;
+    overflow-y: auto;
+  }
+  .pairing-detail-modal {
+    background: var(--surface);
+    border-radius: 28px;
+    max-width: 920px;
+    width: 100%;
+    margin: auto;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+    transform: translateY(20px) scale(0.98);
+    transition: transform 0.5s var(--ease);
+  }
+  .modal-backdrop.active .pairing-detail-modal {
+    transform: translateY(0) scale(1);
+  }
+
+  .pairing-detail-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 5;
+    color: var(--text-primary);
+    transition: all 0.3s var(--ease);
+  }
+  .pairing-detail-close svg { width: 14px; height: 14px; }
+  .pairing-detail-close:hover {
+    background: var(--maroon-deep);
+    color: var(--surface);
+    transform: rotate(90deg);
+  }
+
+  .pairing-detail-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1fr;
+    min-height: 580px;
+  }
+
+  /* Hero stage with floating bottle */
+  .pairing-detail-stage {
+    background:
+      radial-gradient(ellipse at 50% 30%, rgba(255, 255, 255, 0.7), transparent 60%),
+      radial-gradient(ellipse at 50% 80%, rgba(232, 200, 168, 0.3), transparent 65%),
+      linear-gradient(180deg, #faf6ee 0%, #ede2cc 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 40px;
+  }
+  .pairing-detail-stage img {
+    width: 240px;
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 40px 50px rgba(55, 21, 6, 0.25))
+            drop-shadow(0 18px 24px rgba(55, 21, 6, 0.15));
+    animation: bottleFloat 5s ease-in-out infinite;
+    z-index: 2;
+  }
+  .pairing-detail-floor {
+    position: absolute;
+    bottom: 18%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 24px;
+    background: radial-gradient(ellipse, rgba(55, 21, 6, 0.22), transparent 70%);
+    filter: blur(8px);
+    z-index: 1;
+  }
+
+  /* Info column */
+  .pairing-detail-info {
+    padding: 44px 44px 36px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 90vh;
+  }
+
+  .pairing-detail-tag {
+    display: inline-block;
+    align-self: flex-start;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: linear-gradient(120deg, var(--maroon-deep), var(--gold));
+    color: var(--surface);
+    margin-bottom: 14px;
+  }
+  .pairing-detail-family {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 6px;
+  }
+  .pairing-detail-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: clamp(28px, 3.4vw, 38px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  .pairing-detail-code {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .pairing-detail-tagline {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.4;
+    color: var(--maroon-deep);
+    margin-bottom: 22px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  .pairing-detail-section { margin-bottom: 22px; }
+  .pairing-detail-section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 8px;
+  }
+  .pairing-detail-context {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+  .pairing-detail-story {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+  }
+
+  .pairing-detail-notes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .pairing-detail-notes-row {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 10px;
+    align-items: start;
+  }
+  .pairing-detail-notes-stage {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    padding-top: 5px;
+  }
+
+  .pairing-detail-best {
+    background: var(--maroon-soft);
+    border-radius: 14px;
+    padding: 12px 16px;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--maroon-deep);
+  }
+  .pairing-detail-best svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .pairing-detail-cta {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding-top: 8px;
+  }
+  .pairing-detail-cta .price {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+  }
+  .pairing-detail-cta .price small {
+    display: block;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    letter-spacing: 0.12em;
+    margin-top: 2px;
+    text-transform: uppercase;
+  }
+  .pairing-detail-cta .btn { padding: 12px 22px; font-size: 13px; }
   .engraving-summary {
     display: none;
     margin-top: 12px;
@@ -3045,6 +3307,11 @@
     .pairing-card { flex-direction: row; align-items: center; text-align: left; gap: 16px; padding: 16px 18px; }
     .pairing-image { width: 70px; height: 92px; margin-bottom: 0; flex-shrink: 0; }
     .pairing-image img { width: 46px; }
+    .pairing-detail-grid { grid-template-columns: 1fr; min-height: 0; }
+    .pairing-detail-stage { padding: 36px 24px; }
+    .pairing-detail-stage img { width: 180px; }
+    .pairing-detail-info { padding: 32px 28px 28px; max-height: none; }
+    .pairing-detail-backdrop { padding: 24px 12px; }
     .coll-grid { grid-template-columns: 1fr; }
     .coll-stats { grid-template-columns: 1fr; gap: 16px; }
     .stat-card { padding: 24px 22px; }
@@ -3595,6 +3862,77 @@
   </div>
 </div>
 
+<!-- ============================================
+     PAIRING DETAIL MODAL — full info on a companion fragrance
+     ============================================ -->
+<div class="modal-backdrop pairing-detail-backdrop" id="pairingDetailModal">
+  <div class="pairing-detail-modal">
+    <button class="pairing-detail-close" onclick="closePairingDetail()" aria-label="Close" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <div class="pairing-detail-grid">
+      <!-- Hero bottle stage -->
+      <div class="pairing-detail-stage">
+        <img id="pairingDetailImage" src="pair-vanilla28.webp" alt="" />
+        <div class="pairing-detail-floor"></div>
+      </div>
+
+      <!-- Info column -->
+      <div class="pairing-detail-info">
+        <div class="pairing-detail-tag" id="pairingDetailTag">Same Family</div>
+        <div class="pairing-detail-family" id="pairingDetailFamily">Oriental · Gourmand</div>
+        <h3 class="pairing-detail-name" id="pairingDetailName">Vanilla 28</h3>
+        <div class="pairing-detail-code" id="pairingDetailCode">No. 28</div>
+        <p class="pairing-detail-tagline" id="pairingDetailTagline">The original. Vanilla, unhurried.</p>
+
+        <!-- Why it pairs -->
+        <div class="pairing-detail-section">
+          <div class="pairing-detail-section-label">Why It Pairs</div>
+          <p class="pairing-detail-context" id="pairingDetailContext">—</p>
+        </div>
+
+        <!-- The story -->
+        <div class="pairing-detail-section">
+          <div class="pairing-detail-section-label">The Story</div>
+          <p class="pairing-detail-story" id="pairingDetailStory">—</p>
+        </div>
+
+        <!-- Note pyramid -->
+        <div class="pairing-detail-section">
+          <div class="pairing-detail-section-label">Note Pyramid</div>
+          <div class="pairing-detail-notes">
+            <div class="pairing-detail-notes-row">
+              <span class="pairing-detail-notes-stage">Top</span>
+              <div class="note-chips" id="pairingDetailTopNotes"></div>
+            </div>
+            <div class="pairing-detail-notes-row">
+              <span class="pairing-detail-notes-stage">Heart</span>
+              <div class="note-chips" id="pairingDetailHeartNotes"></div>
+            </div>
+            <div class="pairing-detail-notes-row">
+              <span class="pairing-detail-notes-stage">Base</span>
+              <div class="note-chips" id="pairingDetailBaseNotes"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Best layered with -->
+        <div class="pairing-detail-best">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span id="pairingDetailBestWith">—</span>
+        </div>
+
+        <!-- CTA row -->
+        <div class="pairing-detail-cta">
+          <span class="price" id="pairingDetailPrice">$135<small>CAD · 50ml</small></span>
+          <button class="btn btn-primary" onclick="closePairingDetail()">Got It</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   // ============================================
   // FRAGRANCE DATA
@@ -3765,26 +4103,76 @@
   // ============================================
   // PAIRINGS — companion fragrances from the wider Kayali catalog
   // ============================================
+  // Fragrance details (used by both card display and detail modal)
+  const pairingDetails = {
+    "vanilla28": {
+      name: "Vanilla 28",
+      code: "No. 28",
+      family: "Oriental · Gourmand",
+      image: "pair-vanilla28.webp",
+      tagline: "The original. Vanilla, unhurried.",
+      story: "The fragrance that started Kayali's vanilla obsession — a deep, wood-warmed vanilla layered with orchid, tonka, and amber. Mona Kattan's signature scent and the foundation of the modern vanilla revival.",
+      notes: {
+        top: ["Brown Sugar", "Petitgrain"],
+        heart: ["Orchid", "Vanilla Orchid"],
+        base: ["Madagascar Vanilla", "Amber", "Tonka Bean"]
+      },
+      bestWith: "Layers exquisitely with smoky, gourmand, and creamy fragrances.",
+      price: "$135"
+    },
+    "rocksugar": {
+      name: "Vanilla Candy Rock Sugar",
+      code: "No. 42",
+      family: "Gourmand · Sweet",
+      image: "pair-rocksugar.webp",
+      tagline: "Sugar-spun playfulness, bottled.",
+      story: "A sparkling sugar-rush of bergamot, marshmallow, and crystallized vanilla — playful, unapologetic, the fragrance equivalent of a candy-floss memory. Bright on top of any deeper scent.",
+      notes: {
+        top: ["Bergamot", "Strawberry"],
+        heart: ["Marshmallow", "Heliotrope"],
+        base: ["Crystallized Vanilla", "White Musk", "Cashmere Wood"]
+      },
+      bestWith: "A bright top-note layer over warmer ouds and gourmands.",
+      price: "$140"
+    },
+    "musksantal": {
+      name: "Musk Santal Freedom",
+      code: "No. 34",
+      family: "Woody · Musk",
+      image: "pair-musksantal.webp",
+      tagline: "Skin-warmed sandalwood. The quiet kind of confidence.",
+      story: "A creamy, soft-skin sandalwood wrapped in clean white musk and a whisper of bergamot. The fragrance you reach for when you want presence without volume — quietly addictive.",
+      notes: {
+        top: ["Bergamot", "Pink Pepper"],
+        heart: ["Sandalwood", "Cashmere Wood"],
+        base: ["White Musk", "Vanilla", "Amber"]
+      },
+      bestWith: "A grounding base layer for any fragrance — adds warmth without competing.",
+      price: "$145"
+    }
+  };
+
+  // Per-fragrance pairing recommendations (which 3 companions, with relational tag)
   const pairings = {
     vanilla: [
-      { name: "Vanilla 28", code: "No. 28", tag: "Same Family", image: "pair-vanilla28.webp", desc: "The original vanilla — deeper, richer, wood-warmed." },
-      { name: "Vanilla Candy Rock Sugar", code: "No. 42", tag: "Sweetens It", image: "pair-rocksugar.webp", desc: "Sugar-spun playfulness over your warm oud base." },
-      { name: "Musk Santal Freedom", code: "No. 34", tag: "Soft Layer", image: "pair-musksantal.webp", desc: "Skin-warmed sandalwood that lifts the vanilla." }
+      { id: "vanilla28", tag: "Same Family", desc: "The original vanilla — deeper, richer, wood-warmed." },
+      { id: "rocksugar", tag: "Sweetens It", desc: "Sugar-spun playfulness over your warm oud base." },
+      { id: "musksantal", tag: "Soft Layer", desc: "Skin-warmed sandalwood that lifts the vanilla." }
     ],
     cafe: [
-      { name: "Vanilla 28", code: "No. 28", tag: "Sweetens It", image: "pair-vanilla28.webp", desc: "Vanilla cream softens the espresso edge beautifully." },
-      { name: "Musk Santal Freedom", code: "No. 34", tag: "Grounds It", image: "pair-musksantal.webp", desc: "Sandalwood adds quiet depth beneath the coffee." },
-      { name: "Vanilla Candy Rock Sugar", code: "No. 42", tag: "Lifts It", image: "pair-rocksugar.webp", desc: "Sugared playfulness atop the smoky soul." }
+      { id: "vanilla28", tag: "Sweetens It", desc: "Vanilla cream softens the espresso edge beautifully." },
+      { id: "musksantal", tag: "Grounds It", desc: "Sandalwood adds quiet depth beneath the coffee." },
+      { id: "rocksugar", tag: "Lifts It", desc: "Sugared playfulness atop the smoky soul." }
     ],
     chocolate: [
-      { name: "Vanilla 28", code: "No. 28", tag: "Same Family", image: "pair-vanilla28.webp", desc: "Cream and cocoa — the timeless dessert pairing." },
-      { name: "Musk Santal Freedom", code: "No. 34", tag: "Grounds It", image: "pair-musksantal.webp", desc: "Soft sandalwood balances the gourmand depth." },
-      { name: "Vanilla Candy Rock Sugar", code: "No. 42", tag: "Sweetens It", image: "pair-rocksugar.webp", desc: "Sugar-bright lift on top of the chocolate richness." }
+      { id: "vanilla28", tag: "Same Family", desc: "Cream and cocoa — the timeless dessert pairing." },
+      { id: "musksantal", tag: "Grounds It", desc: "Soft sandalwood balances the gourmand depth." },
+      { id: "rocksugar", tag: "Sweetens It", desc: "Sugar-bright lift on top of the chocolate richness." }
     ],
     musk: [
-      { name: "Musk Santal Freedom", code: "No. 34", tag: "Same Family", image: "pair-musksantal.webp", desc: "Sandalwood-musk — your same hush, with more wood." },
-      { name: "Vanilla 28", code: "No. 28", tag: "Warms It", image: "pair-vanilla28.webp", desc: "Creamy vanilla pulls warmth into the milky musk." },
-      { name: "Vanilla Candy Rock Sugar", code: "No. 42", tag: "Sweetens It", image: "pair-rocksugar.webp", desc: "A sugared sparkle to brighten the soft base." }
+      { id: "musksantal", tag: "Same Family", desc: "Sandalwood-musk — your same hush, with more wood." },
+      { id: "vanilla28", tag: "Warms It", desc: "Creamy vanilla pulls warmth into the milky musk." },
+      { id: "rocksugar", tag: "Sweetens It", desc: "A sugared sparkle to brighten the soft base." }
     ]
   };
 
@@ -3794,20 +4182,62 @@
     const list = pairings[key] || pairings.vanilla;
     grid.innerHTML = '';
     list.forEach(p => {
-      const card = document.createElement('div');
+      const detail = pairingDetails[p.id];
+      if (!detail) return;
+      const card = document.createElement('button');
+      card.type = 'button';
       card.className = 'pairing-card';
+      card.setAttribute('aria-label', 'View details for ' + detail.name);
+      card.onclick = () => openPairingDetail(p.id, p.tag, p.desc);
       card.innerHTML = `
-        <div class="pairing-image"><img src="${p.image}" alt="${p.name}" /></div>
+        <div class="pairing-image"><img src="${detail.image}" alt="${detail.name}" /></div>
         <div>
           <div class="pairing-tag">${p.tag}</div>
-          <div class="pairing-name">${p.name}</div>
-          <div class="pairing-code">${p.code}</div>
+          <div class="pairing-name">${detail.name}</div>
+          <div class="pairing-code">${detail.code}</div>
           <div class="pairing-desc">${p.desc}</div>
+          <div class="pairing-view-link">View details
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
         </div>
       `;
       grid.appendChild(card);
     });
   }
+
+  // Open the pairing detail modal — full notes, family, story, why it pairs
+  function openPairingDetail(id, tag, contextDesc) {
+    const d = pairingDetails[id];
+    if (!d) return;
+
+    document.getElementById('pairingDetailImage').src = d.image;
+    document.getElementById('pairingDetailImage').alt = d.name;
+    document.getElementById('pairingDetailFamily').textContent = d.family;
+    document.getElementById('pairingDetailName').textContent = d.name;
+    document.getElementById('pairingDetailCode').textContent = d.code;
+    document.getElementById('pairingDetailTagline').textContent = d.tagline;
+    document.getElementById('pairingDetailTag').textContent = tag;
+    document.getElementById('pairingDetailContext').textContent = contextDesc;
+    document.getElementById('pairingDetailStory').textContent = d.story;
+    document.getElementById('pairingDetailBestWith').textContent = d.bestWith;
+    document.getElementById('pairingDetailPrice').innerHTML = d.price + '<small>CAD · 50ml</small>';
+
+    // Build note pyramid
+    const buildChips = (arr) => arr.map(n => `<span class="note-chip">${n}</span>`).join('');
+    document.getElementById('pairingDetailTopNotes').innerHTML = buildChips(d.notes.top);
+    document.getElementById('pairingDetailHeartNotes').innerHTML = buildChips(d.notes.heart);
+    document.getElementById('pairingDetailBaseNotes').innerHTML = buildChips(d.notes.base);
+
+    document.getElementById('pairingDetailModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  window.openPairingDetail = openPairingDetail;
+
+  function closePairingDetail() {
+    document.getElementById('pairingDetailModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  window.closePairingDetail = closePairingDetail;
 
   // ============================================
   // QUIZ DATA
@@ -4711,8 +5141,18 @@
   document.getElementById('buyModal').addEventListener('click', (e) => {
     if (e.target.id === 'buyModal') closeBuyModal();
   });
+  // Pairing detail modal — click backdrop to close
+  const pairingModal = document.getElementById('pairingDetailModal');
+  if (pairingModal) {
+    pairingModal.addEventListener('click', (e) => {
+      if (e.target.id === 'pairingDetailModal') closePairingDetail();
+    });
+  }
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeBuyModal();
+    if (e.key === 'Escape') {
+      closeBuyModal();
+      closePairingDetail();
+    }
   });
 
   window.addEventListener('load', () => {
