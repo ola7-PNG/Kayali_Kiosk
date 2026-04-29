@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23371506'/%3E%3Ctext x='50' y='72' font-family='Inter,sans-serif' font-size='66' font-weight='700' fill='%23f7f3ec' text-anchor='middle'%3Ek%3C/text%3E%3C/svg%3E">
 <script type="importmap">
 {
   "imports": {
@@ -1524,7 +1525,7 @@
     50% { transform: scale(1.06); box-shadow: 0 0 36px rgba(200, 145, 119, 0.6), inset -4px -4px 10px rgba(55, 21, 6, 0.3); }
   }
 
-  .note-text { flex: 1; min-width: 0; }
+  .note-text { flex: 1; min-width: 0; padding-right: 80px; }
   .note-name {
     font-weight: 600;
     font-size: 15px;
@@ -2342,7 +2343,102 @@
     line-height: 1.4;
   }
 
-  /* Most popular — right card */
+  /* Most popular — right card (full leaderboard) */
+  .stat-leaderboard {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .stat-leader-meta-line {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  .stat-leader-meta-line span#statLeaderboardTotal {
+    color: var(--maroon-deep);
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+  }
+  .leaderboard-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .leaderboard-item {
+    display: grid;
+    grid-template-columns: 24px 1fr 50px;
+    gap: 12px;
+    align-items: center;
+  }
+  .leaderboard-rank {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--text-tertiary);
+    text-align: center;
+  }
+  .leaderboard-item.is-leader .leaderboard-rank {
+    background: linear-gradient(120deg, var(--maroon-deep), var(--gold));
+    color: var(--surface);
+    border-radius: 999px;
+    padding: 3px 0;
+    font-size: 10px;
+  }
+  .leaderboard-info { min-width: 0; }
+  .leaderboard-name-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+    gap: 8px;
+  }
+  .leaderboard-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+    letter-spacing: -0.005em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .leaderboard-item.is-leader .leaderboard-name {
+    font-weight: 600;
+    color: var(--maroon-deep);
+  }
+  .leaderboard-count {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    letter-spacing: 0.04em;
+    flex-shrink: 0;
+  }
+  .leaderboard-bar {
+    background: var(--maroon-soft);
+    height: 5px;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .leaderboard-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--maroon-deep), var(--rose-warm));
+    border-radius: 999px;
+    width: 0;
+    transition: width 1.2s var(--ease);
+  }
+  .leaderboard-item.is-leader .leaderboard-bar-fill {
+    background: linear-gradient(90deg, var(--maroon-deep), var(--gold));
+  }
+  .leaderboard-pct {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    text-align: right;
+  }
+
+  /* Most popular — right card (legacy single-leader, kept in case any page still uses it) */
   .stat-leader {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -3287,26 +3383,21 @@
         <div class="stat-meta" id="statPersonalMeta">Updates live as more profiles complete tonight.</div>
       </div>
 
-      <div class="stat-card stat-leader">
+      <div class="stat-card stat-leaderboard">
         <div class="stat-pulse" id="statPulse">+1 Just Matched</div>
-        <div class="stat-leader-image">
-          <img id="statLeaderImage" src="bottle-vanilla.png" alt="Tonight's most loved" />
+        <div class="stat-leader-eyebrow"><span class="live-dot"></span>Tonight's Leaderboard</div>
+        <div class="stat-leader-meta-line">
+          <span id="statLeaderboardTotal">0</span> profiles tonight · live
         </div>
-        <div class="stat-leader-body">
-          <div class="stat-leader-eyebrow"><span class="live-dot"></span>Tonight's #1</div>
-          <div class="stat-leader-name" id="statLeaderName">—</div>
-          <div class="stat-leader-meta"><strong id="statLeaderPct">—</strong> · <span id="statLeaderCount">—</span></div>
-          <div class="stat-leader-bar"><div class="stat-leader-bar-fill" id="statLeaderBar"></div></div>
-          <div class="stat-leader-update">Live · Real-time updates</div>
-        </div>
+        <div class="leaderboard-list" id="leaderboardList"></div>
       </div>
     </div>
 
-    <!-- Match Ranking -->
+    <!-- Match Ranking (your personal quiz scores) -->
     <div class="match-ranking">
       <div class="ranking-header">
-        <div class="ranking-title">Your Match Strength</div>
-        <div class="ranking-meta">Based on 5 sensory questions</div>
+        <div class="ranking-title">Your Personal Match Strength</div>
+        <div class="ranking-meta">From your 5 sensory answers</div>
       </div>
       <div class="ranking-list" id="rankingList"></div>
     </div>
@@ -3739,38 +3830,50 @@
         : 'You\'re the first match tonight!';
     }
 
-    // --- Tonight's #1 leader card ---
+    // --- Tonight's Leaderboard (all 4 ranked by community match count) ---
     const ranked = Object.keys(data)
       .map(k => ({ key: k, count: data[k] }))
       .sort((a, b) => b.count - a.count);
-    const leader = ranked[0];
-    if (leader && fragrances[leader.key]) {
-      const lf = fragrances[leader.key];
-      const leaderPct = total > 0 ? Math.round((leader.count / total) * 100) : 0;
 
-      const imgEl = document.getElementById('statLeaderImage');
-      const nameLeaderEl = document.getElementById('statLeaderName');
-      const pctLeaderEl = document.getElementById('statLeaderPct');
-      const countLeaderEl = document.getElementById('statLeaderCount');
-      const barLeaderEl = document.getElementById('statLeaderBar');
+    const totalEl = document.getElementById('statLeaderboardTotal');
+    if (totalEl) totalEl.textContent = total.toLocaleString();
 
-      if (imgEl) {
-        imgEl.src = lf.image;
-        imgEl.alt = lf.name;
-      }
-      if (nameLeaderEl) nameLeaderEl.textContent = lf.name;
-      if (pctLeaderEl) pctLeaderEl.textContent = leaderPct + '%';
-      if (countLeaderEl) countLeaderEl.textContent = leader.count.toLocaleString() + ' matches';
-      if (barLeaderEl) {
-        // Reset and re-animate
-        barLeaderEl.style.width = '0%';
-        requestAnimationFrame(() => {
-          barLeaderEl.style.width = leaderPct + '%';
+    const list = document.getElementById('leaderboardList');
+    if (list) {
+      list.innerHTML = '';
+      ranked.forEach((item, idx) => {
+        const f = fragrances[item.key];
+        if (!f) return;
+        const pct = total > 0 ? Math.round((item.count / total) * 100) : 0;
+        const isLeader = idx === 0;
+        const row = document.createElement('div');
+        row.className = 'leaderboard-item' + (isLeader ? ' is-leader' : '');
+        row.innerHTML = `
+          <div class="leaderboard-rank">${idx + 1}</div>
+          <div class="leaderboard-info">
+            <div class="leaderboard-name-row">
+              <span class="leaderboard-name">${f.name}</span>
+              <span class="leaderboard-count">${item.count.toLocaleString()} matches</span>
+            </div>
+            <div class="leaderboard-bar"><div class="leaderboard-bar-fill"></div></div>
+          </div>
+          <div class="leaderboard-pct">${pct}%</div>
+        `;
+        list.appendChild(row);
+      });
+
+      // Animate bars after rows are in DOM
+      requestAnimationFrame(() => {
+        list.querySelectorAll('.leaderboard-item').forEach((row, idx) => {
+          const item = ranked[idx];
+          const pct = total > 0 ? (item.count / total) * 100 : 0;
+          const bar = row.querySelector('.leaderboard-bar-fill');
+          if (bar) bar.style.width = pct + '%';
         });
-      }
+      });
     }
 
-    // Pulse the leader card when a new match comes in
+    // Pulse the leaderboard card when a new match comes in
     if (showPulse) {
       const pulseEl = document.getElementById('statPulse');
       if (pulseEl) {
@@ -3854,6 +3957,9 @@
     }
 
     if (name === 'collection') {
+      // Always re-populate when entering the collection — covers any path in
+      // (button click, modal continue, browser back, refresh, etc.)
+      try { populateCollection(); } catch (e) { console.warn('[Kayali] populateCollection failed:', e); }
       // Animate ranking bars from 0 each time the screen activates
       requestAnimationFrame(() => {
         document.querySelectorAll('.rank-bar-fill').forEach(b => {
@@ -4192,8 +4298,9 @@
   window.goToCollection = goToCollection;
 
   function populateCollection() {
-    // Update personal stat + tonight's leader cards from latest trending data
-    renderCollectionStats();
+    // Update personal stat + tonight's leader cards from latest trending data.
+    // Wrapped so a failure here doesn't block the cards grid from rendering.
+    try { renderCollectionStats(); } catch (e) { console.warn('[Kayali] renderCollectionStats failed:', e); }
 
     // Compute ranking — sort fragrance keys by tally descending; break ties by canonical order
     const order = ['vanilla', 'cafe', 'chocolate', 'musk'];
@@ -4209,35 +4316,43 @@
       });
 
     // Build ranking list
-    const rankingList = document.getElementById('rankingList');
-    rankingList.innerHTML = '';
-    ranked.forEach((item, idx) => {
-      const f = fragrances[item.key];
-      const pct = Math.round((item.votes / total) * 100);
-      const isWinner = item.key === currentWinner;
-      const row = document.createElement('div');
-      row.className = 'ranking-item' + (isWinner ? ' winner' : '');
-      row.innerHTML = `
-        <div class="rank-num">${idx + 1}</div>
-        <div class="rank-name">${f.name}${isWinner ? ' · Your Match' : ''}</div>
-        <div class="rank-bar"><div class="rank-bar-fill" style="--pct: ${pct / 100}"></div></div>
-        <div class="rank-pct">${pct}%</div>
-      `;
-      rankingList.appendChild(row);
-    });
+    try {
+      const rankingList = document.getElementById('rankingList');
+      if (rankingList) {
+        rankingList.innerHTML = '';
+        ranked.forEach((item, idx) => {
+          const f = fragrances[item.key];
+          if (!f) return;
+          const pct = Math.round((item.votes / total) * 100);
+          const isWinner = item.key === currentWinner;
+          const row = document.createElement('div');
+          row.className = 'ranking-item' + (isWinner ? ' winner' : '');
+          row.innerHTML = `
+            <div class="rank-num">${idx + 1}</div>
+            <div class="rank-name">${f.name}${isWinner ? ' · Your Match' : ''}</div>
+            <div class="rank-bar"><div class="rank-bar-fill" style="--pct: ${pct / 100}"></div></div>
+            <div class="rank-pct">${pct}%</div>
+          `;
+          rankingList.appendChild(row);
+        });
+      }
+    } catch (e) { console.warn('[Kayali] ranking list failed:', e); }
 
     // Build cards grid in ranked order
-    const grid = document.getElementById('collGrid');
-    grid.innerHTML = '';
-    ranked.forEach(item => {
-      const f = fragrances[item.key];
-      const pct = Math.round((item.votes / total) * 100);
-      const isWinner = item.key === currentWinner;
+    try {
+      const grid = document.getElementById('collGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      ranked.forEach(item => {
+        const f = fragrances[item.key];
+        if (!f) return;
+        const pct = Math.round((item.votes / total) * 100);
+        const isWinner = item.key === currentWinner;
 
-      // Split note summaries into chip arrays
-      const topChips = f.summary.top.split(',').map(s => `<span class="note-chip">${s.trim()}</span>`).join('');
-      const heartChips = f.summary.heart.split(',').map(s => `<span class="note-chip">${s.trim()}</span>`).join('');
-      const baseChips = f.summary.base.split(',').map(s => `<span class="note-chip">${s.trim()}</span>`).join('');
+        // Split note summaries into chip arrays
+        const topChips = (f.summary?.top || '').split(',').map(s => `<span class="note-chip">${s.trim()}</span>`).join('');
+        const heartChips = (f.summary?.heart || '').split(',').map(s => `<span class="note-chip">${s.trim()}</span>`).join('');
+        const baseChips = (f.summary?.base || '').split(',').map(s => `<span class="note-chip">${s.trim()}</span>`).join('');
 
       const card = document.createElement('article');
       card.className = 'frag-card' + (isWinner ? ' is-winner' : '');
@@ -4294,6 +4409,7 @@
       `;
       grid.appendChild(card);
     });
+    } catch (e) { console.warn('[Kayali] cards grid failed:', e); }
   }
 
   // Kept for compatibility; the cards now call selectFragrance directly.
