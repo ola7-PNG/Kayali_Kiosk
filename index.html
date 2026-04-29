@@ -2203,6 +2203,11 @@
   .screen.collection {
     overflow-y: auto;
     padding: 90px 32px 60px;
+    display: block;
+    align-items: stretch;
+  }
+  .screen.collection.active {
+    display: block;
   }
   .collection-screen-inner {
     max-width: 1200px;
@@ -4359,13 +4364,23 @@
       card.setAttribute('role', 'button');
       card.setAttribute('tabindex', '0');
       card.setAttribute('aria-label', 'Customize ' + f.name);
-      card.onclick = () => selectFragrance(item.key);
-      card.onkeydown = (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
+
+      // Attach click + keyboard handlers via addEventListener (more robust than .onclick)
+      const activate = (ev) => {
+        if (ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+        }
+        try {
           selectFragrance(item.key);
+        } catch (err) {
+          console.error('[Kayali] selectFragrance threw:', err);
         }
       };
+      card.addEventListener('click', activate);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') activate(e);
+      });
 
       card.innerHTML = `
         <div class="frag-card-image">
